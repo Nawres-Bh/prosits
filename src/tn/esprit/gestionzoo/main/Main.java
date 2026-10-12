@@ -1,7 +1,6 @@
 package tn.esprit.gestionzoo.main;
 
-import tn.esprit.gestionzoo.entities.Animal;
-import tn.esprit.gestionzoo.entities.Zoo;
+import tn.esprit.gestionzoo.entities.*;
 
 public class Main {
 
@@ -49,5 +48,32 @@ public class Main {
         // Instruction 18: Test empty zoo name
         myZoo.setName("");
         System.out.println("Test empty zoo name: " + myZoo.getName());
+
+
+        // Instruction 21: default constructors
+        /*
+        Aquatic aquatic = new Aquatic();
+        Terrestrial terrestrial = new Terrestrial();
+        Dolphin dolphin = new Dolphin();
+        Penguin penguin = new Penguin();
+         */
+
+        // Instruction 22: parameterized constructors
+        Aquatic aquatic = new Aquatic("Fish", "Nemo", 2, false, "ocean");
+        Terrestrial terrestrial = new Terrestrial("Felidae", "Leo", 6, true, 4);
+        Dolphin dolphin = new Dolphin("Delphinidae", "Delphi", 8, true, "sea", (float) 35.5);
+        Penguin penguin = new Penguin("Spheniscidae", "Pingu", 4, false, "basin", 120.0f);
+
+        //Instruction 23
+        System.out.println(aquatic);
+        System.out.println(terrestrial);
+        System.out.println(dolphin);
+        System.out.println(penguin);
+
+        //Instruction 24
+        aquatic.swim();
+        dolphin.swim();
+        penguin.swim();
+
     }
 }
