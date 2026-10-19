@@ -58,8 +58,10 @@ public class Main {
         Penguin penguin = new Penguin();
          */
 
-        // Instruction 22: parameterized constructors
-        Aquatic aquatic = new Aquatic("Fish", "Nemo", 2, false, "ocean");
+        //Instruction 22: parameterized constructors
+        //Instruction 26: Question3:Aquatic est abstraite, on ne peut pas l'instancier directement
+        //On utilise donc une de ses classes filles (Dolphin)
+        Aquatic aquatic = new Dolphin("Delphinidae", "Nemo", 2, true, "ocean", 30.0f);
         Terrestrial terrestrial = new Terrestrial("Felidae", "Leo", 6, true, 4);
         Dolphin dolphin = new Dolphin("Delphinidae", "Delphi", 8, true, "sea", (float) 35.5);
         Penguin penguin = new Penguin("Spheniscidae", "Pingu", 4, false, "basin", 120.0f);
@@ -75,5 +77,30 @@ public class Main {
         dolphin.swim();
         penguin.swim();
 
+        //Instruction 25: Question 2
+        myZoo.addAquaticAnimal(aquatic);
+        myZoo.addAquaticAnimal(dolphin); //(Upcast implicite)
+        myZoo.addAquaticAnimal(penguin);
+        myZoo.addAquaticAnimal(new Dolphin("Delphinidae", "Flipper", 5, true, "ocean", 40.0f));
+        myZoo.addAquaticAnimal(new Penguin("Spheniscidae", "Skipper", 6, false, "bassin", 150.0f));
+
+        //Instruction 26: Question 1
+        myZoo.makeAquaticAnimalsSwim();
+        /* Chaque objet appelle sa propre version de swim() selon son vrai type.
+        Le Dolphin affiche son message, alors que le Penguin utilise
+        celui d'Aquatic car il ne redefinit pas swim().*/
+
+        //Instruction 27
+        System.out.println("Max penguin swimming depth: " + myZoo.maxPenguinSwimmingDepth());
+
+        //Instruction 28
+        myZoo.displayNumberOfAquaticsByType();
+
+        //Instruction 31: test de equals()
+        Aquatic d1 = new Dolphin("Delphinidae", "Flipper", 5, true, "ocean", 40.0f);
+        Aquatic d2 = new Dolphin("Delphinidae", "Flipper", 5, true, "ocean", 40.0f);
+        Aquatic d3 = new Dolphin("Delphinidae", "Flipper", 6, true, "ocean", 40.0f);
+        System.out.println(d1.equals(d2));   // meme name, age, habitat
+        System.out.println(d1.equals(d3));   // age different
     }
 }

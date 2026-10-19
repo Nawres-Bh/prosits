@@ -3,6 +3,11 @@ package tn.esprit.gestionzoo.entities;
 public class Zoo {
     private final int NBR_CAGES = 25;
     private Animal[] animals = new Animal[NBR_CAGES];
+    //Instruction 25: Question 1
+    private final int NBR_AQUATIC_CAGES = 10;
+    private Aquatic[] aquaticAnimals = new Aquatic[NBR_AQUATIC_CAGES];
+    private int aquaticCount = 0;
+    //-----
     private int animalCount = 0;
     private String name;
     private String city;
@@ -96,5 +101,50 @@ public class Zoo {
         } else {
             return z2;
         }
+    }
+
+    //Instruction 25: Question 2
+    public void addAquaticAnimal(Aquatic aquatic) {
+        if (aquaticCount < NBR_AQUATIC_CAGES) {
+            aquaticAnimals[aquaticCount] = aquatic;
+            aquaticCount++;
+        } else {
+            System.out.println("No more space for aquatic animals.");
+        }
+    }
+
+    //Instruction 26 : Question 1
+    public void makeAquaticAnimalsSwim() {
+        for (int i=0; i<aquaticCount; i++){
+            aquaticAnimals[i].swim();
+        }
+    }
+
+    //Instruction 27
+    public float maxPenguinSwimmingDepth() {
+        float max=0;
+        for (int i=0;i<aquaticCount; i++){
+            if (aquaticAnimals[i] instanceof Penguin penguin) {
+                if (penguin.swimmingDepth > max) {
+                    max= penguin.swimmingDepth;
+                }
+            }
+        }
+        return max;
+    }
+
+    //Instruction 28
+    public void displayNumberOfAquaticsByType() {
+        int dolphins = 0;
+        int penguins = 0;
+        for (int i = 0; i < aquaticCount; i++) {
+            if (aquaticAnimals[i] instanceof Dolphin) {
+                dolphins++;
+            } else if (aquaticAnimals[i] instanceof Penguin) {
+                penguins++;
+            }
+        }
+        System.out.println("Number of dolphins: " + dolphins);
+        System.out.println("Number of penguins: " + penguins);
     }
 }
