@@ -1,8 +1,12 @@
 package tn.esprit.gestionzoo.entities;
 
 public class Zoo {
+    /*
     private final int NBR_CAGES = 25;
     private Animal[] animals = new Animal[NBR_CAGES];
+    */
+    private final int NBR_CAGES;
+    private Animal[] animals;
     //Instruction 25: Question 1
     private final int NBR_AQUATIC_CAGES = 10;
     private Aquatic[] aquaticAnimals = new Aquatic[NBR_AQUATIC_CAGES];
@@ -16,8 +20,14 @@ public class Zoo {
     public Zoo(String name, String city) {
         setName(name);
         this.city = city;
+        //Instruction 33: Question 3
+        this.NBR_CAGES = 3;
+        this.animals = new Animal[NBR_CAGES];
     }
 
+    public int getAnimalCount() {
+        return animalCount;
+    }
     public String getName() {
         return name;
     }
@@ -47,18 +57,43 @@ public class Zoo {
         return "Zoo name: " + name + ", City: " + city + ", Number of cages: " + NBR_CAGES;
     }
 
-    //Instruction 17: Utiliser la methode isZooFull()
-    public boolean addAnimal(Animal animal){
-        if (isZooFull()){
-            return false;
-        } else if (searchAnimal(animal) != -1){
-            return false;
-        } else {
-            animals[animalCount] = animal ;
+    /*
+    //Instruction 32
+    public void addAnimal(Animal animal){
+        if (searchAnimal(animal) == -1){
+            animals[animalCount] = animal;
             animalCount++;
-            return true;
         }
     }
+    */
+
+    /*
+    //Instruction 33: Question 2
+    public void addAnimal(Animal animal) throws ZooFullException {
+        if (isZooFull()) {
+            throw new ZooFullException("Le zoo est plein, impossible d'ajouter un nouvel animal.");
+        }
+        if (searchAnimal(animal) == -1){
+            animals[animalCount] = animal;
+            animalCount++;
+        }
+    }
+    */
+
+    //Instruction 34: Question 2
+    public void addAnimal(Animal animal) throws ZooFullException, InvalidAgeException {
+        if (isZooFull()) {
+            throw new ZooFullException("Le zoo est plein, impossible d'ajouter un nouvel animal.");
+        }
+        if (animal.getAge() < 0) {
+            throw new InvalidAgeException("Âge d'animal invalide : l'âge ne peut pas être négatif.");
+        }
+        if (searchAnimal(animal) == -1){
+            animals[animalCount] = animal;
+            animalCount++;
+        }
+    }
+
 
     public void displayAnimals(){
         for (int i=0; i< animalCount; i++){
