@@ -4,7 +4,9 @@ import tn.esprit.gestionemployes.entities.Employe;
 import tn.esprit.gestionemployes.entities.SocieteArrayList;
 import tn.esprit.gestionemployes.entities.Departement;
 import tn.esprit.gestionemployes.entities.DepartementHashSet;
+import tn.esprit.gestionemployes.entities.AffectationHashMap;
 
+import java.util.TreeMap;
 import java.util.List;
 
 public class Main {
@@ -80,9 +82,62 @@ public class Main {
         System.out.println(depts.rechercherDepartement(d2));            // true
         System.out.println(depts.rechercherDepartement(new Departement(1, "RH", 0)));
 
-        System.out.println("--- Suppression de d2 ---");
+        System.out.println("Suppression de d2");
         depts.supprimerDepartement(d2);
         System.out.println(depts.rechercherDepartement(d2));            // false
         depts.afficherDepartements();
+
+        //Prosit 10
+        //Instruction 3.b
+        AffectationHashMap aff= new AffectationHashMap();
+        aff.ajouterEmployeDepartement(e1,d1);
+        aff.ajouterEmployeDepartement(e2,d2);
+        aff.ajouterEmployeDepartement(e3,d1);
+        aff.ajouterEmployeDepartement(e4,d3);
+        aff.ajouterEmployeDepartement(e5,d4);
+
+        System.out.println("Affectations");
+        aff.afficherEmployesEtDepartements();
+
+        //Instruction 3.c
+        System.out.println("Meme employe dans deux departements");
+        aff.ajouterEmployeDepartement(e2,d3);
+        aff.afficherEmployesEtDepartements();
+        /*Le HashMap ne garde pas de doublons de cle.
+          put() remplace l'ancien departement par le nouveau .*/
+
+
+        //Tests des instructions 4 a 10
+        System.out.println("Employes");
+        aff.afficherEmployes();
+
+        System.out.println("Departements");
+        aff.afficherDepartements();
+
+        System.out.println("Recherche employe");
+        System.out.println(aff.rechercherEmploye(e1));
+        System.out.println(aff.rechercherEmploye(new Employe(99, "Inconnu", "X", "IT", 1)));
+
+        System.out.println("Recherche departement");
+        System.out.println(aff.rechercherDepartement(d3));
+        System.out.println(aff.rechercherDepartement(new Departement(9, "Marketing", 0)));
+
+        System.out.println("Suppression precise (e2, d1): e2 est lie a d3, rien ne change");
+        aff.supprimerEmployeEtDepartement(e2, d1);
+        System.out.println(aff.rechercherEmploye(e2));
+        System.out.println("Suppression precise (e2, d3): e2 est supprime");
+        aff.supprimerEmployeEtDepartement(e2, d3);
+        System.out.println(aff.rechercherEmploye(e2));
+
+        System.out.println("Suppression de e4");
+        aff.supprimerEmploye(e4);
+        System.out.println(aff.rechercherEmploye(e4));
+
+        System.out.println("Tri par id (TreeMap)");
+        TreeMap<Employe, Departement> tri = aff.trierMap();
+        for (var entry : tri.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+
     }
 }
